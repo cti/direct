@@ -1,5 +1,5 @@
 {
-    "name": "nekufa/direct",
+    "name": "cti/direct",
     "description": "ExtJS Direct php implementation",
     "license": "MIT",
     "authors": [
@@ -10,11 +10,11 @@
     ],
     "autoload": {
         "psr-4": {
-            "Nekufa\\Direct\\" : "src/"
+            "Cti\\Direct\\" : "src/"
         }
     },
     "require": {
-        "nekufa/di" : "*"
+        "cti/di" : "*"
     },
     "require-dev": {
         "phpunit/phpunit": "4.0.*",

@@ -1,8 +1,8 @@
 <?php
 
-use Nekufa\Di\Manager;
-use Nekufa\Direct\Request;
-use Nekufa\Direct\Service;
+use Cti\Di\Manager;
+use Cti\Direct\Request;
+use Cti\Direct\Service;
 
 class DirectTest extends PHPUnit_Framework_TestCase
 {
@@ -24,7 +24,7 @@ class DirectTest extends PHPUnit_Framework_TestCase
         $this->assertSame($request->getData(), array('z'));
 
         $response = $request->generateResponse();
-        $this->assertInstanceOf('Nekufa\Direct\Response', $response);
+        $this->assertInstanceOf('Cti\Direct\Response', $response);
         $this->assertSame($response->getAction(), 'action');
         $this->assertSame($response->getMethod(), 'method');
         $this->assertSame($response->getTid(), 1);
@@ -42,35 +42,35 @@ class DirectTest extends PHPUnit_Framework_TestCase
         $manager = new Manager;
         $tid = 1;
 
-        $manager->getConfiguration()->set('Nekufa\Direct\Service', 'list', array('Common\Api'));
+        $manager->getConfiguration()->set('Cti\Direct\Service', 'list', array('Common\Api'));
 
-        $response = $manager->call('Nekufa\Direct\Service', 'handle', array(
+        $response = $manager->call('Cti\Direct\Service', 'handle', array(
             'request' => Request::create((object) array(
                 'action' => 'Api',
                 'method' => 'greet', 
                 'tid' => $tid,
                 'type' => 'type',
-                'data' => array('nekufa')
+                'data' => array('Cti')
             ))
         ));
 
-        $this->assertSame($response->getResult(), "Hello, nekufa!");
+        $this->assertSame($response->getResult(), "Hello, Cti!");
 
         // test cache by tid
-        $responseWithSameTid = $manager->call('Nekufa\Direct\Service', 'handle', array(
+        $responseWithSameTid = $manager->call('Cti\Direct\Service', 'handle', array(
             'request' => Request::create((object) array(
                 'action' => 'Api',
                 'method' => 'anotherGreet',
                 'tid' => $tid,
                 'type' => 'type',
-                'data' => array('nekufa2')
+                'data' => array('Cti2')
             ))
         ));
 
         $this->assertSame($response, $responseWithSameTid);
 
         // test exception
-        $response = $manager->call('Nekufa\Direct\Service', 'handle', array(
+        $response = $manager->call('Cti\Direct\Service', 'handle', array(
             'request' => Request::create((object) array(
                 'action' => 'Api',
                 'method' => 'exception',
@@ -86,7 +86,7 @@ class DirectTest extends PHPUnit_Framework_TestCase
         $this->assertNotNull($response->getLine());
 
         // test incorrect action
-        $response = $manager->call('Nekufa\Direct\Service', 'handle', array(
+        $response = $manager->call('Cti\Direct\Service', 'handle', array(
             'request' => Request::create((object) array(
                 'action' => 'no_action',
                 'method' => 'no_method',
@@ -100,7 +100,7 @@ class DirectTest extends PHPUnit_Framework_TestCase
         $this->assertContains("Action no_action not found", $response->getResult());
 
         // test incorrect method
-        $response = $manager->call('Nekufa\Direct\Service', 'handle', array(
+        $response = $manager->call('Cti\Direct\Service', 'handle', array(
             'request' => Request::create((object) array(
                 'action' => 'Api',
                 'method' => 'no_method',

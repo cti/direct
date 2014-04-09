@@ -1,19 +1,19 @@
 <?php
 
-namespace Nekufa\Direct;
+namespace Cti\Direct;
 
-use Nekufa\Application\Web;
-use Nekufa\Di\Manager;
+use Cti\Application\Web;
+use Cti\Di\Manager;
 
 class Provider
 {
     /**
-     * @var Nekufa\Direct\Service
+     * @var Cti\Direct\Service
      */
     protected $service;
     
     /**
-     * @param Nekufa\Direct\Service $service
+     * @param Cti\Direct\Service $service
      */
     public function __construct(Service $service)
     {

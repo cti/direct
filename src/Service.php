@@ -1,10 +1,10 @@
 <?php
 
-namespace Nekufa\Direct;
+namespace Cti\Direct;
 
 use Exception;
-use Nekufa\Di\Manager;
-use Nekufa\Di\Reflection;
+use Cti\Di\Manager;
+use Cti\Di\Reflection;
 
 class Service
 {

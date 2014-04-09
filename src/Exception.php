@@ -1,6 +1,6 @@
 <?php
 
-namespace Nekufa\Direct;
+namespace Cti\Direct;
 
 class Exception extends \Exception
 {

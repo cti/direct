@@ -1,9 +1,9 @@
 <?php
 
-namespace Nekufa\Direct;
+namespace Cti\Direct;
 
-use Nekufa\Tools\Web;
-use Nekufa\Di\Manager;
+use Cti\Tools\Web;
+use Cti\Di\Manager;
 
 class Controller
 {
