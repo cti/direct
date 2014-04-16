@@ -12,13 +12,13 @@ class Controller
      */
     public $url = 'direct';
 
-    function getIndex(Provider $provider, Web $application)
+    function get(Provider $provider, Web $application)
     {
         $location = $application->getUrl($this->url);
         echo $provider->getJavascript($location);
     }
 
-    function postIndex(Provider $provider)
+    function post(Provider $provider)
     {
         $request = json_decode($GLOBALS['HTTP_RAW_POST_DATA']);
         $response = $provider->handle($request);
