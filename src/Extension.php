@@ -35,7 +35,7 @@ class Extension
         $controllers = $configuration->push('Cti\Core\Web', 'controllers', $this->controller, $this->path);
 
         // add service classes
-        foreach($application->listClasses($this->namespace) as $class) {
+        foreach($application->getClasses($this->namespace) as $class) {
             $configuration->push('Cti\Direct\Service', 'list', $class);
         }
     }
