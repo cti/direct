@@ -38,5 +38,9 @@ class Extension
         foreach($application->getClasses($this->namespace) as $class) {
             $configuration->push('Cti\Direct\Service', 'list', $class);
         }
+
+        if($configuration->get('Cti\Direct\Service', 'list') == null) {
+            $configuration->set('Cti\Direct\Service', 'list', array());
+        }
     }
 }

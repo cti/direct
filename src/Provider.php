@@ -2,7 +2,7 @@
 
 namespace Cti\Direct;
 
-use Cti\Application\Web;
+use Cti\Core\Web;
 use Cti\Di\Manager;
 
 class Provider

@@ -2,8 +2,7 @@
 
 namespace Cti\Direct;
 
-use Cti\Tools\Web;
-use Cti\Di\Manager;
+use Cti\Core\Web;
 
 class Controller
 {
@@ -12,9 +11,9 @@ class Controller
      */
     public $url = 'direct';
 
-    function get(Provider $provider, Web $application)
+    function get(Provider $provider, Web $web)
     {
-        $location = $application->getUrl($this->url);
+        $location = $web->getUrl($this->url);
         echo $provider->getJavascript($location);
     }
 
@@ -25,3 +24,4 @@ class Controller
         echo json_encode($response);
     }
 }
+
