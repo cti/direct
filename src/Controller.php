@@ -2,7 +2,8 @@
 
 namespace Cti\Direct;
 
-use Cti\Core\Web;
+use Cti\Core\Module\Web;
+use Cti\Di\Manager;
 
 class Controller
 {
@@ -11,16 +12,34 @@ class Controller
      */
     public $url = 'direct';
 
-    function get(Provider $provider, Web $web)
+    /**
+     * @inject
+     * @var Cti\Direct\Service
+     */
+    protected $service;
+
+    function get(Web $web)
     {
-        $location = $web->getUrl($this->url);
-        echo $provider->getJavascript($location);
+        echo 'Ext.Direct.addProvider({
+            type: "remoting",
+            url: "'. $web->getUrl($this->url) . '",
+            actions: '.json_encode($this->service->getActions()).'
+        });';
     }
 
-    function post(Provider $provider)
+    function post(Manager $manager)
     {
-        $request = json_decode($GLOBALS['HTTP_RAW_POST_DATA']);
-        $response = $provider->handle($request);
+        $data = json_decode($GLOBALS['HTTP_RAW_POST_DATA']);
+        if(!is_array($data)) {
+            $response = $this->service->handle($manager, Request::create($data));
+
+        } else {
+            $response = array();
+            foreach($data as $request) {
+                $response[] = $this->service->handle($manager, Request::create($request));
+            }
+        }
+
         echo json_encode($response);
     }
 }
