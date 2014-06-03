@@ -8,6 +8,8 @@ class Controller
 {
     function get(Module $module, Service $service)
     {
+        header('Content-type: text/javascript');
+        
         echo 'Ext.Direct.addProvider({
             type: "remoting",
             url: "'. $module->getUrl() . '",
@@ -27,6 +29,8 @@ class Controller
                 $response[] = $service->handle($manager, Request::create($request));
             }
         }
+
+        header('Content-type: text/javascript');
         echo json_encode($response);
     }
 }
