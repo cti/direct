@@ -28,6 +28,12 @@ class Module implements Bootloader
     public $path = 'direct';
 
     /**
+     * @inject
+     * @var Build\Application
+     */
+    public $application;
+
+    /**
      * Aplication url
      */
     public $url;
@@ -35,8 +41,6 @@ class Module implements Bootloader
     public function boot(Application $application)
     {
         $application->getManager()->getInitializer()->after('Cti\Core\Module\Web', array($this, 'registerController'));
-
-        $this->url = $application->getWeb()->getUrl($this->path);
 
         $configuration = $application->getManager()->getConfiguration();
         $classes = $application->getProject()->getClasses('Direct');
@@ -55,6 +59,9 @@ class Module implements Bootloader
 
     public function getUrl()
     {
+        if(is_null($this->url)) {
+            $this->url = $this->application->getWeb()->getUrl($this->path);
+        }
         return $this->url;
     }
 
