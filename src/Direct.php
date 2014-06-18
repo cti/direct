@@ -8,7 +8,7 @@ use Cti\Core\Module\Project;
 use Cti\Core\Module\Web;
 use Cti\Di\Configuration;
 
-class Module implements Bootloader
+class Direct implements Bootloader
 {
     /** 
      * Namespace for direct server api

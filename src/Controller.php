@@ -6,13 +6,13 @@ use Cti\Di\Manager;
 
 class Controller
 {
-    function get(Module $module, Service $service)
+    function get(Direct $direct, Service $service)
     {
         header('Content-type: text/javascript');
         
         echo 'Ext.Direct.addProvider({
             type: "remoting",
-            url: "'. $module->getUrl() . '",
+            url: "'. $direct->getUrl() . '",
             actions: '.json_encode($service->getActions()).'
         });';
     }
